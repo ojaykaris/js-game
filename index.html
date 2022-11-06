@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RPS GAME</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div>
+      <h1>Rock Paper Scissors</h1>
+      <select name="first" id="choice">
+        <option value="">Choose an option</option>
+        <option value="R">ROCK</option>
+        <option value="P">PAPER</option>
+        <option value="S">SCISSORS</option>
+      </select>
+      <p>Your Choice:<span id="usersChoice"></span></p>
+      <p>Computer's choice:<span id="computer-choice"></span></p>
+      <p>Result:<span id="result"></span></p>
+      <button id="playagain" hidden>Play again</button>
+    </div>
+    <script>
+      var userChoiceElement = document.getElementById("choice");
+      var userChoiceDisplayElement = document.getElementById("usersChoice");
+      var computerChoiceDisplayElement =
+        document.getElementById("computer-choice");
+      var againPlayAgainButton = document.getElementById("playagain");
+      var resultDisplayElement = document.getElementById("result");
+      var options = ["R", "P", "S"];
+      userChoiceElement.addEventListener(
+        "input",
+        function userChoiceElementinputEventHandler(addEventListener) {
+          var userChoice = event.target.value;
+          var computerChoice =
+            options[Math.floor(Math.random() * options.length)];
+          var result = "winner";
+
+          if (userChoice == computerChoice) {
+            result = "Draw";
+          } else if (userChoice == "R" && computerChoice == "P") {
+            result = "Lost";
+          } else if (userChoice == "P" && computerChoice == "s") {
+            result = "Lost";
+          } else if (userChoice == "S" && computerChoice == "R") {
+            result = "Lost";
+          }
+          userChoiceElement.setAttribute("hidden", "");
+          againPlayAgainButton.removeAttribute("hidden");
+
+          userChoiceDisplayElement.innerText = userChoice;
+          computerChoiceDisplayElement.innerText = computerChoice;
+          resultDisplayElement.innerText = result;
+        }
+      );
+      againPlayAgainButton.addEventListener(
+        "click",
+        function playAgainButtonClickEventHandler() {
+          userChoiceElement.removeAttribute("hidden");
+          againPlayAgainButton.setAttribute("hidden", "");
+
+          userChoiceElement.value = "";
+          computerChoiceDisplayElement.innerText = "";
+          userChoiceDisplayElement.innerText = "";
+          resultDisplayElement.innerText = "";
+        }
+      );
+    </script>
+  </body>
+</html>
